@@ -68,9 +68,9 @@ void WIFI_Connect(){
 void setup() {
   pinMode(PIN_LED, OUTPUT);
 
-  setupSensors();
-
   Serial.begin(19200);
+
+  setupSensors();
   WIFI_Connect();
 }
 
