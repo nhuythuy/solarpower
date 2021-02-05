@@ -1,23 +1,15 @@
 #include <ESP8266WiFi.h>
 #include "global_vars.h"
+#include "auth_settings.h"
 
 
 #ifndef WIFI_CLOUD
 #define WIFI_CLOUD
 
-#define WIFI_AP "VNNO"
-#define WIFI_PW "Planetvegen18A"
-
-#define CAYENNE_USERNAME  "3541f5b0-d9b3-11ea-883c-638d8ce4c23d"
-#define CAYENNE_PASSWORD  "0573b7bfc25b7afb4042b3bb93ed8f16a6dd6fc2"
-#define CAYENNE_CLIENT_ID "10df0a00-5a78-11eb-883c-638d8ce4c23d"
-
-#define BLYNK_PW          "79pVr226PqcM-DKB7ldkaWVULxeAC5i4"
-
 const char* wifiSsid = WIFI_AP;
 const char* wifiPassword = WIFI_PW;
 
-IPAddress ip(192, 168, 1, 5);             // IP address of the server
+IPAddress ip(192, 168, 1, 6);             // IP address of the server
 IPAddress gateway(192,168,1,1);           // gateway of your network
 IPAddress subnet(255,255,255,0);          // subnet mask of your network
 WiFiServer server(80);
