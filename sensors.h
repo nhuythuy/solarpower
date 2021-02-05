@@ -15,7 +15,7 @@ void setupSensors(){
 
 void updateBattVolt(){
   int analogValue = analogRead(A0);
-  ssBatteryVolt = (analogValue/1023.0) * 3300; // 3300 is the voltage provided by NodeMCU
+  ssBatteryVolt = (analogValue/1023.0) * 3.3; // 3300 is the voltage provided by NodeMCU
   Serial.println("Batt Volt: " + String(ssBatteryVolt, 2));
 }
 
