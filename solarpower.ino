@@ -18,16 +18,16 @@ void setup() {
   pinMode(PIN_LED, OUTPUT);
 
   Serial.begin(19200);
-
-  setupSensors();
   WIFI_Connect();
+
+  //setupSensors();
 }
 
 // =======================================================
 void loop (){
   runtimeMinutes = millis() / 60000;
   updateBattVolt();
-  updateTempHumid();
+  //updateTempHumid();
 
   CommMain();
 

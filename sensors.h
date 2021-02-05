@@ -29,5 +29,5 @@ void updateTempHumid(){
   Serial.println("Temp.: " + String(tmp.temperature) + " degrees C");
   Serial.println("Humidity: " + String(humid.relative_humidity) + " % rH");
  
-  delay(2000);
+  delay(1000);
 }
