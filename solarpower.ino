@@ -6,11 +6,13 @@
  *  ESP32
  */
 
-#include <WiFi.h>
+#include <ESP8266WiFi.h>
 #include "global_vars.h"
 #include "pin_define.h"
+#include "sensors.h"
 #include "wifi_pw.h"
 #include <ArduinoJson.h>
+
 
 #define DELAY_LONG        5000            // 5,0 seconds
 #define DELAY_SHORT       1000
@@ -66,6 +68,8 @@ void WIFI_Connect(){
 void setup() {
   pinMode(PIN_LED, OUTPUT);
 
+  setupSensors();
+
   Serial.begin(19200);
   WIFI_Connect();
 }
@@ -84,19 +88,12 @@ void delayWithErrorCheck(){
     delay(delayMs);
 }
 
-float updateTemp(){
-  int analogValue = analogRead(A0);
-  float millivolts = (analogValue/2048.0) * 3300; // 3300 is the voltage provided by NodeMCU
-  float celsius = millivolts/10;
-  Serial.println("Temp. in deg. C: " + String(celsius));
-  return celsius;
-}
-
 // https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/
 // Potentiometer is connected to GPIO 34 (Analog ADC1_CH6) 
 void loop (){
   runtimeMinutes = millis() / 60000;
-  temp = updateTemp();
+  updateBattVolt();
+  updateTempHumid();
 
   WiFiClient client = server.available();
   if (client) {
@@ -112,7 +109,7 @@ void loop (){
       doc["node"] = "powerstation";
       doc["heartbeat"] = heartbeat++;
       doc["runtime"] = runtimeMinutes;
-      doc["battvolt"] = -10;
+      doc["battvolt"] = ssBatteryVolt;
       doc["temp"] = String(temp, 2);
       doc["humidity"] = String(humidity, 2);
 
