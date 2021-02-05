@@ -13,12 +13,7 @@
 #include "comm_main.h"
 
 
-#define DELAY_LONG        5000            // 5,0 seconds
-#define DELAY_SHORT       1000
-
-int serverHomeCounter = 0;
-
-
+// =======================================================
 void setup() {
   pinMode(PIN_LED, OUTPUT);
 
@@ -28,21 +23,7 @@ void setup() {
   WIFI_Connect();
 }
 
-
-void blinkLed(){
-  stateLed = !stateLed;
-  digitalWrite(PIN_LED, stateLed);
-  delay(1000);
-}
-
-void delayWithErrorCheck(){
-    if(globalState > 0)
-    blinkLed();
-  else
-    delay(delayMs);
-}
-
-
+// =======================================================
 void loop (){
   runtimeMinutes = millis() / 60000;
   updateBattVolt();
