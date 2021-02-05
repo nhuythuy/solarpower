@@ -11,7 +11,7 @@
 #include "pin_define.h"
 #include "sensors.h"
 #include "wifi_pw.h"
-#include <ArduinoJson.h>
+#include "comm_main.h"
 
 
 #define DELAY_LONG        5000            // 5,0 seconds
@@ -88,41 +88,13 @@ void delayWithErrorCheck(){
     delay(delayMs);
 }
 
-// https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/
-// Potentiometer is connected to GPIO 34 (Analog ADC1_CH6) 
+
 void loop (){
   runtimeMinutes = millis() / 60000;
   updateBattVolt();
   updateTempHumid();
 
-  WiFiClient client = server.available();
-  if (client) {
-    if (client.connected()) {
-      stateLed = !stateLed;
-      digitalWrite(PIN_LED, stateLed);
-      Serial.println(".");
-      String request = client.readStringUntil('\n');        // receives the message from the client
-      Serial.print("Request from client: "); Serial.println(request);
-      client.flush();
-
-      DynamicJsonDocument doc(100);
-      doc["node"] = "powerstation";
-      doc["heartbeat"] = heartbeat++;
-      doc["runtime"] = runtimeMinutes;
-      doc["battvolt"] = ssBatteryVolt;
-      doc["temp"] = String(temp, 2);
-      doc["humidity"] = String(humidity, 2);
-
-      char jsonSolarPower[100];
-      serializeJson(doc, jsonSolarPower);
-      client.println(String(jsonSolarPower) + "\n");
-      Serial.println("Reply from server: " + String(jsonSolarPower));
-
-      stateLed = !stateLed;
-      digitalWrite(PIN_LED, stateLed);
-    }
-    client.stop();                // terminates the connection with the client
-  }
+  CommMain();
 
   if(WiFi.status() == WL_DISCONNECTED){
     Serial.println("WiFi connection lost! Reconnecting...");
