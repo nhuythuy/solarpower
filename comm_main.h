@@ -14,7 +14,6 @@ void CommMain(){
 
       DynamicJsonDocument doc(100);
       doc["node"] = "powerstation";
-      doc["heartbeat"] = heartbeat++;
       doc["runtime"] = runtimeMinutes;
       doc["battvolt"] = ssBatteryVolt;
       doc["temp"] = String(temp, 2);
@@ -27,7 +26,7 @@ void CommMain(){
 
       flipLed();
     }
-    client.stop();                // tarminates the connection with the client
+    client.stop();                // terminates the connection with the client
   }
 
 }
