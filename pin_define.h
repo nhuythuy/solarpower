@@ -8,7 +8,7 @@
 #define PIN_SS_I2C_SDA              D2
 
 // outputs
-#define PIN_LED                     22 // same as built in LED GPIO22
+#define PIN_LED                     D4 // same as built in LED GPIO22
 #define PIN_TONE_MELODY             D8
 
 // remaining pins: RX (in), D3

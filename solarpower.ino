@@ -13,22 +13,34 @@
 #include "comm_main.h"
 
 
+#define WDT_TIMEOUT   300 // 300 sec
+
 // =======================================================
 void setup() {
+  ESP.wdtDisable();
   pinMode(PIN_LED, OUTPUT);
 
   Serial.begin(19200);
   WIFI_Connect();
 
   setupSensors();
+
+  ESP.wdtEnable(5000); // msec
 }
 
 // =======================================================
 void loop (){
-  runtimeMinutes = millis() / 60000;
-  updateBattVolt();
-  updateTempHumid();
+  ESP.wdtFeed();
 
+  long mill = millis();
+  runtimeMinutes = millis() / 60000;
+  if((mill - ssSamplingTimer) > 2000){ // sampling sensors every 1 sec
+    updateBattVolt();
+    updateTempHumid();
+
+    ssSamplingTimer = mill;
+  }
+  
   CommMain();
 
   if(WiFi.status() == WL_DISCONNECTED){
@@ -37,5 +49,6 @@ void loop (){
     WIFI_Connect();
   }
 
-  delay(1000);
+  flipLed();
+  delay(100);
 }
