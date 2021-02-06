@@ -20,14 +20,14 @@ void setup() {
   Serial.begin(19200);
   WIFI_Connect();
 
-  //setupSensors();
+  setupSensors();
 }
 
 // =======================================================
 void loop (){
   runtimeMinutes = millis() / 60000;
   updateBattVolt();
-  //updateTempHumid();
+  updateTempHumid();
 
   CommMain();
 
