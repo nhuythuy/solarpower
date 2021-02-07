@@ -13,8 +13,6 @@
 #include "comm_main.h"
 
 
-#define WDT_TIMEOUT   300 // 300 sec
-
 // =======================================================
 void setup() {
   ESP.wdtDisable();
