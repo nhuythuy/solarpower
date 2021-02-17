@@ -9,6 +9,9 @@ long ssSamplingTimer = 0;
 long globalState = 0;
 int debugCounter = 0;
 
+int currentDay = -1;
+int currentHour = -1;
+
 bool stateLed = 0;
 
 // sensors
