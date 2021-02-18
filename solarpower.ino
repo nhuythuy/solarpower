@@ -49,7 +49,7 @@ void loop (){
 
   currentMillis = millis();
   runtimeMinutes = currentMillis / 60000;
-  if((currentMillis - previousMillis) > 2000){  // sampling sensors every 2 sec
+  if(abs(currentMillis - previousMillis) > 2000){  // sampling sensors every 2 sec
     previousMillis = currentMillis;             // save the last time  
 
 #ifdef ENABLE_WIFI
@@ -66,7 +66,6 @@ void loop (){
     updateTempHumid();
   }
   
-//  CommMain();
 #ifdef ENABLE_WIFI
 #ifdef ENABLE_CAYENNE
   Cayenne.loop();
