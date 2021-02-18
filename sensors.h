@@ -1,6 +1,8 @@
 #include "global_vars.h"
 #include "Adafruit_SHTC3.h"
 
+#define ADC_RATIO (1500 + 220 + 100) / 100 // 1M5 + 220K + 100K
+
 Adafruit_SHTC3 shtc3 = Adafruit_SHTC3();
 
 void setupSensors(){
@@ -15,7 +17,8 @@ void setupSensors(){
 
 void updateBattVolt(){
   int analogValue = analogRead(A0);
-  ssBatteryVolt = (analogValue/1023.0) * 3.3; // 3300 is the voltage provided by NodeMCU
+  ssBatteryVolt = (analogValue/1024.0) * ADC_RATIO; // 1.0V is the max ADC voltage
+
   Serial.println("Batt Volt: " + String(ssBatteryVolt, 2));
 }
 

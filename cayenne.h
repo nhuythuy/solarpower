@@ -32,6 +32,7 @@ char dvClientID[] = CAYENNE_CLIENT_ID;
 #define CH_PS_RUNTIME                       41   // power station
 #define CH_PS_TEMPERATURE                   42
 #define CH_PS_HUMIDITY                      43
+#define CH_PS_BATT_VOLTATE                  44
 
 // digital states
 #define CH_DOOR_MAIN                51
@@ -57,9 +58,10 @@ void cayenneSetup(){
 }
 
 CAYENNE_OUT_DEFAULT(){
-    Cayenne.virtualWrite(CH_BATT_VOLTAGE, ssBatteryVolt, "batt", "V");
+    Cayenne.virtualWrite(CH_PS_BATT_VOLTATE, ssBatteryVolt, "batt", "V");
     Cayenne.virtualWrite(CH_PS_RUNTIME, runtimeMinutes, "counter");
     Cayenne.celsiusWrite(CH_PS_TEMPERATURE, temp);
+    Cayenne.virtualWrite(CH_PS_HUMIDITY, humidity, "rel_hum", "p");
     Cayenne.virtualWrite(CH_PS_HUMIDITY, humidity, "rel_hum", "p");
 
   // digital signals

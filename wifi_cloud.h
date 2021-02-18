@@ -20,7 +20,7 @@ void WIFI_Connect(){
   Serial.println("MAC: " + WiFi.macAddress()); Serial.println();
   Serial.println("Connecting to " + String(wifiSsid));
 
-  WiFi.config(ip, gateway, subnet);       // forces to use the fix IP
+//  WiFi.config(ip, gateway, subnet);       // forces to use the fix IP
   WiFi.begin(wifiSsid, wifiPassword);
 
   bool ledStatus = false;
