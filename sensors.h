@@ -1,4 +1,5 @@
 #include "global_vars.h"
+#include "lib.h"
 #include "Adafruit_SHTC3.h"
 
 #define ADC_RATIO (1500 + 220 + 100) / 100 // 1M5 + 220K + 100K

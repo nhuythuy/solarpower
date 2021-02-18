@@ -41,10 +41,15 @@ void setup() {
   ESP.wdtEnable(5000); // msec
 }
 
+unsigned long previousMillis = millis();
+unsigned long currentMillis = millis();
 // =======================================================
 void loop (){
   ESP.wdtFeed();
 
+  currentMillis = millis();
+  runtimeMinutes = currentMillis / 60000;
+  if((currentMillis - previousMillis) > 2000){ // sampling sensors every 2 sec
 #ifdef ENABLE_WIFI
   if(WiFi.status() == WL_DISCONNECTED){
     Serial.println("WiFi connection lost! Reconnecting...");
@@ -55,13 +60,10 @@ void loop (){
     getServerTime();
 #endif
 
-  long mill = millis();
-  runtimeMinutes = millis() / 60000;
-  if((mill - ssSamplingTimer) > 2000){ // sampling sensors every 2 sec
     updateBattVolt();
     updateTempHumid();
 
-    ssSamplingTimer = mill;
+    previousMillis = currentMillis;
   }
   
 //  CommMain();
@@ -74,6 +76,6 @@ void loop (){
 #endif
 #endif
 
-//  flipLed();
+  flipLed();
   delay(100);
 }
