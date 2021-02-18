@@ -49,7 +49,9 @@ void loop (){
 
   currentMillis = millis();
   runtimeMinutes = currentMillis / 60000;
-  if((currentMillis - previousMillis) > 2000){ // sampling sensors every 2 sec
+  if((currentMillis - previousMillis) > 2000){  // sampling sensors every 2 sec
+    previousMillis = currentMillis;             // save the last time  
+
 #ifdef ENABLE_WIFI
   if(WiFi.status() == WL_DISCONNECTED){
     Serial.println("WiFi connection lost! Reconnecting...");
@@ -62,8 +64,6 @@ void loop (){
 
     updateBattVolt();
     updateTempHumid();
-
-    previousMillis = currentMillis;
   }
   
 //  CommMain();
