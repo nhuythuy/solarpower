@@ -10,26 +10,24 @@
 const char* wifiSsid = WIFI_AP;
 const char* wifiPassword = WIFI_PW;
 
-IPAddress ip(192, 168, 1, 6);             // IP address of the server
-IPAddress gateway(192,168,1,1);           // gateway of your network
-IPAddress subnet(255,255,255,0);          // subnet mask of your network
-WiFiServer server(80);
+//IPAddress ip(192, 168, 1, 6);             // IP address of the server
+//IPAddress gateway(192,168,1,1);           // gateway of your network
+//IPAddress subnet(255,255,255,0);          // subnet mask of your network
+//WiFiServer server(80);
 
 void WIFI_Connect(){
   Serial.println();
   Serial.println("MAC: " + WiFi.macAddress()); Serial.println();
   Serial.println("Connecting to " + String(wifiSsid));
 
-//  WiFi.config(ip, gateway, subnet);       // forces to use the fix IP
+  //WiFi.config(ip, gateway, subnet);       // forces to use the static IP
   WiFi.begin(wifiSsid, wifiPassword);
 
-  bool ledStatus = false;
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
 
-    ledStatus = !ledStatus;
-    digitalWrite(PIN_LED, !ledStatus);
+    flipLed();
     if(debugCounter++ > 80)
     {
       debugCounter = 0;
@@ -37,7 +35,7 @@ void WIFI_Connect(){
     }
   }
 
-  delay(200);
+  delay(100);
   Serial.println();
   Serial.println("Connected to wifi");
   Serial.print("Status: ");   Serial.println(WiFi.status());    // Network parameters
@@ -47,10 +45,7 @@ void WIFI_Connect(){
   Serial.print("SSID: ");     Serial.println(WiFi.SSID());
   Serial.print("Signal: ");   Serial.println(WiFi.RSSI());
   Serial.println();
-  delay(200);
-
-  server.begin(); // starts the server
-  delay(200);
+  delay(100);
 }
 
 #endif
