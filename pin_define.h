@@ -11,4 +11,7 @@
 #define PIN_LED                     D4 // same as built in LED GPIO22
 #define PIN_TONE_MELODY             D8
 
+#define PIN_CAM_POWER               D2 // No. 1, power for entrance led
+#define PIN_AC_POWER_LIGHT          D3 // OK as output
+
 // remaining pins: RX (in), D3
