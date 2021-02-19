@@ -4,6 +4,7 @@
 #include "sensors.h"
 #include "blynk.h"
 #include "cayenne.h"
+#include "actuators.h"
 
 #define ENABLE_WIFI
 #define ENABLE_BLYNK
