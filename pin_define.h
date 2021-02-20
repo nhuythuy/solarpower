@@ -9,9 +9,11 @@
 
 // outputs
 #define PIN_LED                     D4 // same as built in LED GPIO22
-#define PIN_TONE_MELODY             D8
 
-#define PIN_CAM_POWER               D2 // No. 1, power for entrance led
-#define PIN_AC_POWER_LIGHT          D3 // OK as output
+#define PIN_AC_CAM_POWER            D5 // No. 1, power for entrance led
+//#define PIN_AC_POWER_LIGHT          D3 // OK as output
+#define PIN_AC_LED_HEART_LEFT       D6
+#define PIN_AC_LED_HEART_RIGHT      D7
+#define PIN_AC_LIGHT_MAIN_DOOR      D8
 
 // remaining pins: RX (in), D3

@@ -23,10 +23,13 @@ int blynkCounter = 0;
 #define VP_LR_TEMPERATURE                   V22
 #define VP_LR_HUMIDITY                      V23
 
+#define VP_PS_BATT_VOLTATE                  V40
 #define VP_PS_RUNTIME                       V41   // power station node
 #define VP_PS_TEMPERATURE                   V42
 #define VP_PS_HUMIDITY                      V43
-#define VP_PS_BATT_VOLTATE                  V44
+
+#define VP_PS_AC_LED_HEART_MODE             V45
+#define VP_PS_AC_MAIN_DOOR_LIGHT            V47
 
 // digital states
 #define VP_DOOR_MAIN                V51
@@ -65,6 +68,14 @@ void blynkReconnect() {
       BLYNK_LOG("Not reconnected");
     }
   }
+}
+
+BLYNK_WRITE(VP_PS_AC_LED_HEART_MODE){
+  heartLedMode = param.asInt();
+}
+
+BLYNK_WRITE(VP_PS_AC_MAIN_DOOR_LIGHT){
+  mainDoorLightMode = param.asInt();
 }
 
 

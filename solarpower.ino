@@ -14,7 +14,9 @@
 void setup() {
   ESP.wdtDisable();
   pinMode(PIN_LED, OUTPUT);
-  pinMode(PIN_AC_POWER_LIGHT, OUTPUT);
+  pinMode(PIN_AC_LED_HEART_LEFT, OUTPUT);
+  pinMode(PIN_AC_LED_HEART_RIGHT, OUTPUT);
+  pinMode(PIN_AC_LIGHT_MAIN_DOOR, OUTPUT);
 
   Serial.begin(19200);
 #ifdef ENABLE_WIFI
