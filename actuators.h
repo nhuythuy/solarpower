@@ -3,8 +3,15 @@
 #ifndef ACTUATORS
 #define ACTUATORS
 
+void setupActuators(){
+  pinMode(PIN_LED, OUTPUT);
+  pinMode(PIN_AC_LED_HEART_LEFT, OUTPUT);
+  pinMode(PIN_AC_LED_HEART_RIGHT, OUTPUT);
+  pinMode(PIN_AC_LIGHT_MAIN_DOOR, OUTPUT);  
+}
+
 void updateActuators(){
-  if((ssBatteryVolt > 12.50) && ((currentHour > 20) || (currentHour < 7))){
+  if((ssBatteryVolt > 12.50) && ((currentHour > 19) || (currentHour < 8))){
     digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
   }
   else{
