@@ -11,13 +11,14 @@ void setupActuators(){
 }
 
 void updateActuators(){
-  if((ssBatteryVolt > 12.50) && ((currentHour > 19) || (currentHour < 8))){
-    digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
+  if(((currentHour > 19) || (currentHour < 8))){
+    if(ssBatteryVolt > 12.3){
+      digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
+    }
+    if(ssBatteryVolt < 11.8){
+      digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, LOW);
+    }
   }
-  else{
-    digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, LOW);
-  }
-
 }
 
 void updateLedHeart(){
