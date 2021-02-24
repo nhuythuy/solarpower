@@ -28,8 +28,10 @@ int blynkCounter = 0;
 #define VP_PS_TEMPERATURE                   V42
 #define VP_PS_HUMIDITY                      V43
 
-#define VP_PS_AC_LED_HEART_MODE             V45
-#define VP_PS_AC_MAIN_DOOR_LIGHT            V47
+#define VP_PS_AC_MAIN_DOOR_LIGHT_ON         V44   // status
+
+#define VP_PS_AC_MAIN_DOOR_LIGHT            V45
+#define VP_PS_AC_LED_HEART_MODE             V46
 
 // digital states
 #define VP_DOOR_MAIN                V51
@@ -110,6 +112,8 @@ void blynkTimerEvent()
   
   // You can send any value at any time.
   // Please don't send more that 10 values per second.
+  Blynk.virtualWrite(VP_PS_AC_MAIN_DOOR_LIGHT_ON, (mainDoorLightOn ? 255 : 0));
+
   Serial.println("Blynk timer triggered...");
   // for all signals to be sent at once
 }

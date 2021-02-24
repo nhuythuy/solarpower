@@ -22,6 +22,8 @@ bool acBuzzer = 0;
 int playMelodyCounter = 0;
 int runtimeMinutes = 0;
 
+bool mainDoorLightOn = 0;
+
 int mainDoorLightMode = 0;
 int heartLedMode = 0;
 
