@@ -30,6 +30,7 @@ int blynkCounter = 0;
 
 #define VP_PS_AC_MAIN_DOOR_LIGHT_ON         V44   // status
 
+// control signals, only available on Blynk
 #define VP_PS_AC_MAIN_DOOR_LIGHT            V45
 #define VP_PS_AC_LED_HEART_MODE             V46
 
