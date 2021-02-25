@@ -14,16 +14,20 @@ void updateActuators(){
   Serial.println("Batt Volt: " + String(ssBatteryVolt, 2) + ", Current house: " + String(currentHour));
 
   if(((currentHour > 19) || (currentHour < 8))){
-    if(ssBatteryVolt > 12.5){ // 12.3
+    if(ssBatteryVolt > 13.0){ // 13.0
       Serial.println("Main door LIGHT ON!");
       mainDoorLightOn = 1;
       digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, LOW);
     }
-    if(ssBatteryVolt < 12.0){ // 11.8
+    if(ssBatteryVolt < 12.0){ // 12.0
       Serial.println("Main door LIGHT OFF!");
       mainDoorLightOn = 0;
       digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
     }
+  }
+  else{  // turn light OFF
+    Serial.println("Main door LIGHT OFF!");
+    digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
   }
 }
 
