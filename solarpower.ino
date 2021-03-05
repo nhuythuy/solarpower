@@ -39,6 +39,11 @@ unsigned long currentMillis = millis();
 void loop (){
   ESP.wdtFeed();
 
+  if(!enableLoadPowerRead){
+    enableLoadPowerRead = true;
+    enableLoadPower = (boolean)readState(ADDRESS_ENABLE_LOAD_POWER);
+  }
+
   currentMillis = millis();
   runtimeMinutes = currentMillis / 60000;
   if(abs(currentMillis - previousMillis) > 2000){  // sampling sensors every 2 sec

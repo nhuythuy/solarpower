@@ -8,6 +8,9 @@ long delayMs = DELAY_SHORT;
 long globalState = 0;
 int debugCounter = 0;
 
+bool enableLoadPowerRead = false;
+bool enableLoadPower = false;
+
 bool stateLed = 0;
 
 // sensors

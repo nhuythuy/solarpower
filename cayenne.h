@@ -62,22 +62,23 @@ void cayenneSetup(){
   delay(200);
 }
 
+void writeCayenneDigitalState(int channelId, int value){
+  delay(MESSAGE_DELAY);
+  Cayenne.virtualWrite(channelId, value, "digital_sensor", "d");
+}
+
 CAYENNE_OUT_DEFAULT(){
   Cayenne.virtualWrite(CH_PS_BATT_VOLTATE, ssBatteryVolt, "batt", "V");
   Cayenne.virtualWrite(CH_PS_RUNTIME, runtimeMinutes, "counter");
   Cayenne.celsiusWrite(CH_PS_TEMPERATURE, temp);
   Cayenne.virtualWrite(CH_PS_HUMIDITY, humidity, "rel_hum", "p");
   Cayenne.virtualWrite(CH_PS_HUMIDITY, humidity, "rel_hum", "p");
-  writeCayenneDigitalStates(CH_PS_AC_MAIN_DOOR_LIGHT_ON, mainDoorLightOn)
+  writeCayenneDigitalState(CH_PS_AC_MAIN_DOOR_LIGHT_ON, mainDoorLightOn);
 
   // digital signals
 
 }
 
-void writeCayenneDigitalStates(int channelId, int value){
-  delay(MESSAGE_DELAY);
-  Cayenne.virtualWrite(channelId, value, "digital_sensor", "d");
-}
 
 
 #endif
