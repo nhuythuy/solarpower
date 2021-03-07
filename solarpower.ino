@@ -31,6 +31,9 @@ void setup() {
   setupSensors();
 
   ESP.wdtEnable(5000); // msec
+
+  autoLoadPower = (boolean)readState(ADDRESS_AUTO_LOAD_POWER);
+  manualLoadPowerOn = (boolean)readState(ADDRESS_MANUAL_LOAD_POWER_ON);
 }
 
 unsigned long previousMillis = millis();
@@ -38,16 +41,6 @@ unsigned long currentMillis = millis();
 // =======================================================
 void loop (){
   ESP.wdtFeed();
-
-  if(!autoLoadPowerRead){
-    autoLoadPowerRead = true;
-    autoLoadPower = (boolean)readState(ADDRESS_AUTO_LOAD_POWER);
-  }
-
-  if(!manualLoadPowerOnRead){
-    manualLoadPowerOnRead = true;
-    manualLoadPowerOn = (boolean)readState(ADDRESS_MANUAL_LOAD_POWER_ON);
-  }
 
   currentMillis = millis();
   runtimeMinutes = currentMillis / 60000;
