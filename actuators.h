@@ -34,12 +34,12 @@ void updateActuators(){
     }
   }
   else{ // autoLoadPower == OFF or MANUAL activated
-    if(manualLoadPowerOn){
+    if(manualLoadPowerOn && (ssBatteryVolt > 13.2)){
       Serial.println("Manual: Main door LIGHT ON!");
       mainDoorLightOn = 1;
       digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, LOW);
     }
-    else if(ssBatteryVolt < 12.8){
+    else{
       Serial.println("Manual: Main door LIGHT OFF!");
       mainDoorLightOn = 0;
       digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
