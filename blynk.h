@@ -51,8 +51,8 @@ void blynkReconnect() {
 
 
 BLYNK_WRITE(VP_ENABLE_LOAD_POWER){
-  enableLoadPower = (boolean)param.asInt();
-  storeState(ADDRESS_ENABLE_LOAD_POWER, enableLoadPower);
+  autoLoadPower = (boolean)param.asInt();
+  storeState(ADDRESS_ENABLE_LOAD_POWER, autoLoadPower);
 }
 
 BLYNK_WRITE(VP_PS_AC_LED_HEART_MODE){

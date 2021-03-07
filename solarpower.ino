@@ -39,9 +39,9 @@ unsigned long currentMillis = millis();
 void loop (){
   ESP.wdtFeed();
 
-  if(!enableLoadPowerRead){
-    enableLoadPowerRead = true;
-    enableLoadPower = (boolean)readState(ADDRESS_ENABLE_LOAD_POWER);
+  if(!autoLoadPowerRead){
+    autoLoadPowerRead = true;
+    autoLoadPower = (boolean)readState(ADDRESS_ENABLE_LOAD_POWER);
   }
 
   currentMillis = millis();

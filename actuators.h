@@ -14,7 +14,7 @@ void setupActuators(){
 void updateActuators(){
   Serial.println("Batt Volt: " + String(ssBatteryVolt, 2) + ", Current house: " + String(currentHour));
 
-  if(enableLoadPower && ((currentHour > 18) || (currentHour < 8))){
+  if(autoLoadPower && ((currentHour > 18) || (currentHour < 8))){
     if(ssBatteryVolt > 13.3){
       Serial.println("Main door LIGHT ON!");
       mainDoorLightOn = 1;
