@@ -6,7 +6,8 @@
 #ifndef LIB
 #define LIB
 
-#define ADDRESS_ENABLE_LOAD_POWER   0
+#define ADDRESS_AUTO_LOAD_POWER     0
+#define ADDRESS_MANUAL_LOAD_POWER_ON  1
 
 void flipLed(){
   stateLed = !stateLed;

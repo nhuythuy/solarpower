@@ -14,22 +14,36 @@ void setupActuators(){
 void updateActuators(){
   Serial.println("Batt Volt: " + String(ssBatteryVolt, 2) + ", Current house: " + String(currentHour));
 
-  if(autoLoadPower && ((currentHour > 18) || (currentHour < 8))){
-    if(ssBatteryVolt > 13.3){
-      Serial.println("Main door LIGHT ON!");
-      mainDoorLightOn = 1;
-      digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, LOW);
+  if(autoLoadPower){
+    if((currentHour > 18) || (currentHour < 8)){
+      if(ssBatteryVolt > 13.3){
+        Serial.println("Auto: Main door LIGHT ON!");
+        mainDoorLightOn = 1;
+        digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, LOW);
+      }
+      else if(ssBatteryVolt < 12.8){
+        Serial.println("Auto: Main door LIGHT OFF!");
+        mainDoorLightOn = 0;
+        digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
+      }
     }
-    else if(ssBatteryVolt < 12.8){
-      Serial.println("Main door LIGHT OFF!");
+    else{  // turn light OFF
+      Serial.println("Auto: Main door LIGHT OFF!");
       mainDoorLightOn = 0;
       digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
     }
   }
-  else{  // turn light OFF
-    Serial.println("Main door LIGHT OFF!");
-    mainDoorLightOn = 0;
-    digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
+  else{ // autoLoadPower == OFF or MANUAL activated
+    if(manualLoadPowerOn){
+      Serial.println("Manual: Main door LIGHT ON!");
+      mainDoorLightOn = 1;
+      digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, LOW);
+    }
+    else if(ssBatteryVolt < 12.8){
+      Serial.println("Manual: Main door LIGHT OFF!");
+      mainDoorLightOn = 0;
+      digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
+    }
   }
 }
 

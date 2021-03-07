@@ -41,7 +41,12 @@ void loop (){
 
   if(!autoLoadPowerRead){
     autoLoadPowerRead = true;
-    autoLoadPower = (boolean)readState(ADDRESS_ENABLE_LOAD_POWER);
+    autoLoadPower = (boolean)readState(ADDRESS_AUTO_LOAD_POWER);
+  }
+
+  if(!manualLoadPowerOnRead){
+    manualLoadPowerOnRead = true;
+    manualLoadPowerOn = (boolean)readState(ADDRESS_MANUAL_LOAD_POWER_ON);
   }
 
   currentMillis = millis();

@@ -21,7 +21,8 @@ int blynkCounter = 0;
 #define VP_PS_AC_LED_HEART_MODE             V46
 
 // digital states
-#define VP_ENABLE_LOAD_POWER                V51
+#define VP_AUTO_LOAD_POWER                V51
+#define VP_MANUAL_LOAD_POWER_ON           V52
 
 #define VP_FORCE_RADIO_POWER        V100
 #define VP_FORCE_CAMERA_POWER       V101
@@ -50,9 +51,14 @@ void blynkReconnect() {
 }
 
 
-BLYNK_WRITE(VP_ENABLE_LOAD_POWER){
+BLYNK_WRITE(VP_AUTO_LOAD_POWER){
   autoLoadPower = (boolean)param.asInt();
-  storeState(ADDRESS_ENABLE_LOAD_POWER, autoLoadPower);
+  storeState(ADDRESS_AUTO_LOAD_POWER, autoLoadPower);
+}
+
+BLYNK_WRITE(VP_MANUAL_LOAD_POWER_ON){
+  manualLoadPowerOn = (boolean)param.asInt();
+  storeState(ADDRESS_MANUAL_LOAD_POWER_ON, manualLoadPowerOn);
 }
 
 BLYNK_WRITE(VP_PS_AC_LED_HEART_MODE){
