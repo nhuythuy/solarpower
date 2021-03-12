@@ -14,6 +14,8 @@ int blynkCounter = 0;
 #define VP_PS_TEMPERATURE                   V3
 #define VP_PS_HUMIDITY                      V4
 
+#define VP_SYSTEM_TIME                      V10
+
 #define VP_PS_AC_MAIN_DOOR_LIGHT_ON         V44   // status
 
 // control signals, only available on Blynk
@@ -86,6 +88,11 @@ BLYNK_READ(VP_PS_TEMPERATURE){
 BLYNK_READ(VP_PS_HUMIDITY){
   Blynk.virtualWrite(VP_PS_HUMIDITY, humidity);
 }
+
+BLYNK_READ(VP_SYSTEM_TIME){
+  Blynk.virtualWrite(VP_SYSTEM_TIME, systemHourMinute);
+}
+
 
 // This function sends Arduino's up time every second to Virtual Pin (5).
 // In the app, Widget's reading frequency should be set to PUSH. This means

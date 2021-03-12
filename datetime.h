@@ -7,10 +7,6 @@
 #define DATE_TIME
 
 
-int currentDay = -1;
-int currentHour = -1;
-int currentMin = -1;
-
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "time.nist.gov");
 char* DayOfWeek[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
@@ -28,7 +24,8 @@ void getServerTime(){
   currentDay = timeClient.getDay();
   currentHour = timeClient.getHours();
   currentMin = timeClient.getMinutes();
-  
+
+  systemHourMinute = (float)currentHour + currentMin / 100.0;
   Serial.println("Today:  " + String(DayOfWeek[currentDay]) + " (" + String(currentDay) + ") - " + timeClient.getFormattedTime());  
 }
 

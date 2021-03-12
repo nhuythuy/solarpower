@@ -30,4 +30,9 @@ bool mainDoorLightOn = 0;
 int mainDoorLightMode = 0;
 int heartLedMode = 0;
 
+int currentHour = -1;
+int currentDay = -1;
+int currentMin = -1;
+float systemHourMinute = 0.0;
+
 #endif
