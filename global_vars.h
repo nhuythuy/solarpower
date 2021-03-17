@@ -8,7 +8,7 @@ long delayMs = DELAY_SHORT;
 long globalState = 0;
 int debugCounter = 0;
 
-bool autoLoadPower = false;
+bool autoLoadPower = true;
 bool manualLoadPowerOn = false;
 
 bool stateLed = 0;

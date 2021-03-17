@@ -21,7 +21,7 @@ void updateActuators(){
         mainDoorLightOn = 1;
         digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, LOW);
       }
-      else if(ssBatteryVolt < 12.8){
+      else if(ssBatteryVolt < 13.0){
         Serial.println("Auto: Main door LIGHT OFF!");
         mainDoorLightOn = 0;
         digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
