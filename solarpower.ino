@@ -42,6 +42,7 @@ unsigned long currentMillis = millis();
 void loop (){
   ESP.wdtFeed();
 
+  yield();
   currentMillis = millis();
   runtimeMinutes = currentMillis / 60000;
   if(abs(currentMillis - previousMillis) > 2000){  // sampling sensors every 2 sec
@@ -54,19 +55,25 @@ void loop (){
     WIFI_Connect();    
   }
 
+    yield();
     getServerTime();
 #endif
 
+    yield();
     updateBattVolt();
+    yield();
     updateTempHumid();
+    yield();
     updateActuators();
   }
   
 #ifdef ENABLE_WIFI
 #ifdef ENABLE_CAYENNE
+  yield();
   Cayenne.loop();
 #endif
 #ifdef ENABLE_BLYNK
+  yield();
   blynkLoop();
 #endif
 #endif
