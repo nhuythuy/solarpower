@@ -11,38 +11,54 @@ void setupActuators(){
   digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH); // light OFF at startup
 }
 
-void updateActuators(){
-  Serial.println("Batt Volt: " + String(ssBatteryVolt, 2) + ", Current house: " + String(currentHour));
+void turnOnEntranceLight(){
+  Serial.println("Auto: Main door LIGHT ON!");
+  mainDoorLightOn = 1;
+  digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, LOW);  
+}
 
-  if(autoLoadPower){
-    if((currentHour > 18) || (currentHour < 8)){
-      if(ssBatteryVolt > 13.3){
-        Serial.println("Auto: Main door LIGHT ON!");
-        mainDoorLightOn = 1;
-        digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, LOW);
+void turnOffEntranceLight(){
+  Serial.println("Auto: Main door LIGHT OFF!");
+  mainDoorLightOn = 0;
+  digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
+}
+
+void updateEntranceLight(){
+  if(ssBatteryVolt > 13.3){
+    if((currentMonth > 3) && (currentMonth < 11)){ // from April to October
+      if((currentHour > 18) || (currentHour < 8)){
+        updateEntranceLight();
       }
-      else if(ssBatteryVolt < 13.0){
-        Serial.println("Auto: Main door LIGHT OFF!");
-        mainDoorLightOn = 0;
-        digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
+      else{
+        turnOffEntranceLight();
       }
     }
-    else{  // turn light OFF
-      Serial.println("Auto: Main door LIGHT OFF!");
-      mainDoorLightOn = 0;
-      digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
+    else // from November to March
+    {
+      if((currentHour > 17) || (currentHour < 7)){
+        updateEntranceLight();
+      }
+      else{
+        turnOffEntranceLight();
+      }      
     }
   }
+  else if(ssBatteryVolt < 13.0){
+    turnOffEntranceLight();
+  }    
+}
+
+void updateActuators(){
+  Serial.println("Batt Volt: " + String(ssBatteryVolt, 2) + ", Current hour: " + String(currentHour));
+
+  if(autoLoadPower){
+  }
   else{ // autoLoadPower == OFF or MANUAL activated
-    if(manualLoadPowerOn && (ssBatteryVolt > 13.2)){
-      Serial.println("Manual: Main door LIGHT ON!");
-      mainDoorLightOn = 1;
-      digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, LOW);
+    if(manualLoadPowerOn && (ssBatteryVolt > 13.3)){
+      turnOnEntranceLight();
     }
     else{
-      Serial.println("Manual: Main door LIGHT OFF!");
-      mainDoorLightOn = 0;
-      digitalWrite(PIN_AC_LIGHT_MAIN_DOOR, HIGH);
+      turnOffEntranceLight();
     }
   }
 }
