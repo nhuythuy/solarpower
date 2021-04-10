@@ -24,7 +24,7 @@ void turnOffEntranceLight(){
 }
 
 void updateEntranceLight(){
-  if(ssBatteryVolt > 13.3){
+  if(ssBatteryVolt > 13.2){
     int eveningTimeToTurnOn = 17;                   // same for all days of a year
     int morningTimeToTurnOff = 7;                   // from November to March, shorter day with sunlight
     if((currentMonth > 3) && (currentMonth < 11)){  // from April to October, longer day with sunlight
