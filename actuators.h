@@ -27,12 +27,20 @@ void updateEntranceLight(){
   if(ssBatteryVolt > 13.2){
     int eveningTimeToTurnOn = 17;                   // same for all days of a year
     int morningTimeToTurnOff = 7;                   // from November to March, shorter day with sunlight
-    if((currentMonth > 3) && (currentMonth < 11)){  // from April to October, longer day with sunlight
-      morningTimeToTurnOff = 6;
-    else
+    if((currentMonth >= 5) && (currentMonth <= 8)){ // from May to August, longest day with sunlight
+      morningTimeToTurnOff = 2;
+      eveningTimeToTurnOn = 23;
+    }
+    else if((currentMonth == 4) || (currentMonth == 9)){  // from April and September, longer day with sunlight
+      morningTimeToTurnOff = 5;
+      eveningTimeToTurnOn = 19;
+    }
+    else{                                           // the rest of the year
       morningTimeToTurnOff = 7;
+      eveningTimeToTurnOn = 17;
+    }
     
-    if((currentHour > eveningTimeToTurnOn) || (currentHour < morningTimeToTurnOff)){
+    if((currentHour >= eveningTimeToTurnOn) || (currentHour <= morningTimeToTurnOff)){
       turnOnEntranceLight();
     }
     else{
