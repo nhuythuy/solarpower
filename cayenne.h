@@ -16,18 +16,7 @@ char dvClientID[] = CAYENNE_CLIENT_ID;
 #define MAX_CAYENNE_SIGNAL                  21 // find the last index and update here
 
 #define CH_BATT_VOLTAGE                     1
-#define CH_BM_RUNTIME                       2 // basement node
-#define CH_BM_TEMPERATURE                   3
-#define CH_BM_HUMIDITY                      4
-#define CH_ENTRANCE_MOTION_DETECTED_SECONDS 5
-#define CH_DOOR_MAIN_OPENED_MINUTES         6
-#define CH_DOOR_TO_BASEMENT_OPENED_MINUTES  7
-#define CH_DOOR_BASEMENT_OPENED_MINUTES     8
-#define CH_DOOR_BACK_OPENED_MINUTES         9
-
-#define CH_LR_RUNTIME                       21   // living room node
-#define CH_LR_TEMPERATURE                   22
-#define CH_LR_HUMIDITY                      23
+#define CH_SYSTEM_TIME                      10
 
 #define CH_PS_BATT_VOLTATE                  40
 #define CH_PS_RUNTIME                       41   // power station
@@ -40,19 +29,6 @@ char dvClientID[] = CAYENNE_CLIENT_ID;
 #define CH_PS_AC_LED_HEART_MODE             46
 
 // digital states
-#define CH_DOOR_MAIN                51
-#define CH_DOOR_TO_BASEMENT         52
-#define CH_DOOR_BASEMENT            53
-#define CH_DOOR_BACK                54
-#define CH_ENTRANCE_MOTION          55
-#define CH_LIGHT_BASEMENT           56
-#define CH_LIGHT_STAIR_BASEMENT     57
-#define CH_ENTRANCE_LIGHT           58
-#define CH_POWER_RADIO              59
-#define CH_WATER_SMOKE_BASEMENT     60
-#define CH_WATER_LEAK_1             61
-
-#define CH_FORCE_RADIO_POWER        100
 
 
 void cayenneSetup(){
@@ -74,6 +50,7 @@ CAYENNE_OUT_DEFAULT(){
   Cayenne.virtualWrite(CH_PS_HUMIDITY, humidity, "rel_hum", "p");
   Cayenne.virtualWrite(CH_PS_HUMIDITY, humidity, "rel_hum", "p");
   writeCayenneDigitalState(CH_PS_AC_MAIN_DOOR_LIGHT_ON, mainDoorLightOn);
+  Cayenne.virtualWrite(CH_SYSTEM_TIME, systemHourMinute);
 
   // digital signals
 
