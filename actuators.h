@@ -31,11 +31,11 @@ void updateEntranceLight(){
       morningTimeToTurnOff = 2;
       eveningTimeToTurnOn = 23;
     }
-    else if((currentMonth == 4) || (currentMonth == 9)){  // from April and September, longer day with sunlight
+    else if((currentMonth == 4) || (currentMonth == 9)){  // April and September, longer day with sunlight
       morningTimeToTurnOff = 5;
-      eveningTimeToTurnOn = 19;
+      eveningTimeToTurnOn = 20;
     }
-    else{                                           // the rest of the year
+    else{                                                 // the rest of the year: short day with sunlight
       morningTimeToTurnOff = 7;
       eveningTimeToTurnOn = 17;
     }
