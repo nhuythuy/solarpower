@@ -15,6 +15,7 @@ int blynkCounter = 0;
 #define VP_PS_HUMIDITY                      V4
 
 #define VP_SYSTEM_TIME                      V10
+#define VP_LAST_DEBUG_CODE                  V11
 
 #define VP_PS_AC_MAIN_DOOR_LIGHT_ON         V44   // status
 
@@ -91,6 +92,10 @@ BLYNK_READ(VP_PS_HUMIDITY){
 
 BLYNK_READ(VP_SYSTEM_TIME){
   Blynk.virtualWrite(VP_SYSTEM_TIME, systemHourMinute);
+}
+
+BLYNK_READ(VP_LAST_DEBUG_CODE){
+  Blynk.virtualWrite(VP_LAST_DEBUG_CODE, lastDebugCode);
 }
 
 

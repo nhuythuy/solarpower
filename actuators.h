@@ -24,41 +24,50 @@ void turnOffEntranceLight(){
 }
 
 void updateEntranceLight(){
+  lastDebugCode = 0;
   if(ssBatteryVolt > 13.2){
     int eveningTimeToTurnOn = 17;                   // same for all days of a year
     int morningTimeToTurnOff = 7;                   // from November to March, shorter day with sunlight
     if((currentMonth >= 5) && (currentMonth <= 8)){ // from May to August, longest day with sunlight
       morningTimeToTurnOff = 2;
       eveningTimeToTurnOn = 23;
+      lastDebugCode = 1;
     }
     else if((currentMonth == 4) || (currentMonth == 9)){  // April and September, longer day with sunlight
       morningTimeToTurnOff = 5;
       eveningTimeToTurnOn = 20;
+      lastDebugCode = 2;
     }
     else{                                                 // the rest of the year: short day with sunlight
       morningTimeToTurnOff = 7;
       eveningTimeToTurnOn = 17;
+      lastDebugCode = 3;
     }
     
     if((currentHour >= eveningTimeToTurnOn) || (currentHour <= morningTimeToTurnOff)){
       turnOnEntranceLight();
+      lastDebugCode = 10 + lastDebugCode;
     }
     else{
       turnOffEntranceLight();
+      lastDebugCode = 20 + lastDebugCode;
     }      
   }
   else if(ssBatteryVolt < 13.0){
     turnOffEntranceLight();
+    lastDebugCode = 30 + lastDebugCode;
   }    
+  Serial.println("Last debug code: " + String(lastDebugCode));
 }
 
 void updateActuators(){
   Serial.println("Batt Volt: " + String(ssBatteryVolt, 2) + ", Current hour: " + String(currentHour));
 
   if(autoLoadPower){
+    updateEntranceLight();
   }
   else{ // autoLoadPower == OFF or MANUAL activated
-    if(manualLoadPowerOn && (ssBatteryVolt > 13.3)){
+    if(manualLoadPowerOn && (ssBatteryVolt > 13.2)){
       turnOnEntranceLight();
     }
     else{
