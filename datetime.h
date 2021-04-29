@@ -17,6 +17,14 @@ void setupDateTime(){
   timeClient.setTimeOffset(3600); // Norway GMT + 1
 }
 
+int getMonth() {
+  time_t rawtime = timeClient.getEpochTime();
+  struct tm * ti;
+  ti = localtime (&rawtime);
+  int month = (ti->tm_mon + 1) < 10 ? 0 + (ti->tm_mon + 1) : (ti->tm_mon + 1);
+  
+  return month;
+}
 
 void getServerTime(){
   Serial.println();
@@ -24,6 +32,8 @@ void getServerTime(){
   currentDay = timeClient.getDay();
   currentHour = timeClient.getHours();
   currentMin = timeClient.getMinutes();
+
+  currentMonth = getMonth();
 
   systemHourMinute = (float)currentHour + currentMin / 100.0;
   Serial.println("Today:  " + String(DayOfWeek[currentDay]) + " (" + String(currentDay) + ") - " + timeClient.getFormattedTime());  
