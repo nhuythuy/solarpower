@@ -31,7 +31,9 @@ bool mainDoorLightOn = 0;
 int mainDoorLightMode = 0;
 int heartLedMode = 0;
 
+int currentYear = -1;
 int currentMonth = -1;
+int currentDate = -1;
 int currentHour = -1;
 int currentDay = -1;
 int currentMin = -1;

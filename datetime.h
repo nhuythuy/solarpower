@@ -17,6 +17,24 @@ void setupDateTime(){
   timeClient.setTimeOffset(3600); // Norway GMT + 1
 }
 
+void getYearMonthDate() {
+  time_t rawtime = timeClient.getEpochTime();
+  struct tm * ti;
+  ti = localtime (&rawtime);
+  int currentYear = ti->tm_year + 1900;
+  int currentMonth = (ti->tm_mon + 1) < 10 ? 0 + (ti->tm_mon + 1) : (ti->tm_mon + 1);
+  int currentDate = (ti->tm_mday) < 10 ? 0 + (ti->tm_mday) : (ti->tm_mday);
+}
+
+int getYear() {
+  time_t rawtime = timeClient.getEpochTime();
+  struct tm * ti;
+  ti = localtime (&rawtime);
+  int year = ti->tm_year + 1900;
+  
+  return year;
+}
+
 int getMonth() {
   time_t rawtime = timeClient.getEpochTime();
   struct tm * ti;
@@ -26,6 +44,15 @@ int getMonth() {
   return month;
 }
 
+int getDate() {
+  time_t rawtime = timeClient.getEpochTime();
+  struct tm * ti;
+  ti = localtime (&rawtime);
+  int date = (ti->tm_mday) < 10 ? 0 + (ti->tm_mday) : (ti->tm_mday);
+  
+  return date;
+}
+
 void getServerTime(){
   Serial.println();
   timeClient.update();
@@ -33,7 +60,7 @@ void getServerTime(){
   currentHour = timeClient.getHours();
   currentMin = timeClient.getMinutes();
 
-  currentMonth = getMonth();
+  getYearMonthDate();
 
   systemHourMinute = (float)currentHour + currentMin / 100.0;
   Serial.println("Today:  " + String(DayOfWeek[currentDay]) + " (" + String(currentDay) + ") - " + timeClient.getFormattedTime());  

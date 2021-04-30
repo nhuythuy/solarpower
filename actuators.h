@@ -33,12 +33,21 @@ void updateEntranceLight(){
       eveningTimeToTurnOn = 23;
       lastDebugCode = 1;
     }
-    else if((currentMonth == 4) || (currentMonth == 9)){  // April and September, longer day with sunlight
+    else if(currentMonth == 4){  // April longer day with sunlight
       morningTimeToTurnOff = 5;
       eveningTimeToTurnOn = 20;
+      if(currentDate > 15)        // one more hour delay last half days of month
+        eveningTimeToTurnOn = 21;
       lastDebugCode = 2;
     }
-    else{                                                 // the rest of the year: short day with sunlight
+    else if(currentMonth == 9){   // September, longer day with sunlight
+      morningTimeToTurnOff = 5;
+      eveningTimeToTurnOn = 20;
+      if(currentDate < 15)        // one more hour delay first half days of this month
+        eveningTimeToTurnOn = 21;
+      lastDebugCode = 2;
+    }
+    else{                         // the rest of the year: short day with sunlight
       morningTimeToTurnOff = 7;
       eveningTimeToTurnOn = 17;
       lastDebugCode = 3;
