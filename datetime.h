@@ -21,9 +21,9 @@ void getYearMonthDate() {
   time_t rawtime = timeClient.getEpochTime();
   struct tm * ti;
   ti = localtime (&rawtime);
-  int currentYear = ti->tm_year + 1900;
-  int currentMonth = (ti->tm_mon + 1) < 10 ? 0 + (ti->tm_mon + 1) : (ti->tm_mon + 1);
-  int currentDate = (ti->tm_mday) < 10 ? 0 + (ti->tm_mday) : (ti->tm_mday);
+  currentYear = ti->tm_year + 1900;
+  currentMonth = (ti->tm_mon + 1) < 10 ? 0 + (ti->tm_mon + 1) : (ti->tm_mon + 1);
+  currentDate = (ti->tm_mday) < 10 ? 0 + (ti->tm_mday) : (ti->tm_mday);
 }
 
 int getYear() {
@@ -63,6 +63,7 @@ void getServerTime(){
   getYearMonthDate();
 
   systemHourMinute = (float)currentHour + currentMin / 100.0;
+  Serial.println("Date YYYY-MM-DD:  " + String(currentYear) + "-" + String(currentMonth) + "-" + String(currentDate));  
   Serial.println("Today:  " + String(DayOfWeek[currentDay]) + " (" + String(currentDay) + ") - " + timeClient.getFormattedTime());  
 }
 

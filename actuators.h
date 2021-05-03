@@ -30,7 +30,7 @@ void updateEntranceLight(){
     int morningTimeToTurnOff = 7;                   // from November to March, shorter day with sunlight
     if((currentMonth >= 5) && (currentMonth <= 8)){ // from May to August, longest day with sunlight
       morningTimeToTurnOff = 2;
-      eveningTimeToTurnOn = 23;
+      eveningTimeToTurnOn = 22;
       lastDebugCode = 1;
     }
     else if(currentMonth == 4){  // April longer day with sunlight
