@@ -50,7 +50,7 @@ CAYENNE_OUT_DEFAULT(){
   Cayenne.virtualWrite(CH_PS_HUMIDITY, humidity, "rel_hum", "p");
   Cayenne.virtualWrite(CH_PS_HUMIDITY, humidity, "rel_hum", "p");
   writeCayenneDigitalState(CH_PS_AC_MAIN_DOOR_LIGHT_ON, mainDoorLightOn);
-  Cayenne.virtualWrite(CH_SYSTEM_TIME, systemHourMinute);
+  Cayenne.virtualWrite(CH_SYSTEM_TIME, systemClock);
 
   // digital signals
 

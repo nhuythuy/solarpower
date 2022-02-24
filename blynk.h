@@ -91,7 +91,7 @@ BLYNK_READ(VP_PS_HUMIDITY){
 }
 
 BLYNK_READ(VP_SYSTEM_TIME){
-  Blynk.virtualWrite(VP_SYSTEM_TIME, systemHourMinute);
+  Blynk.virtualWrite(VP_SYSTEM_TIME, systemClock);
 }
 
 BLYNK_READ(VP_LAST_DEBUG_CODE){

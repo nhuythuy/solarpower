@@ -15,7 +15,7 @@ void setup() {
   ESP.wdtDisable();
   setupActuators();
 
-  Serial.begin(19200);
+  Serial.begin(115200);
 #ifdef ENABLE_WIFI
   WIFI_Connect();
   setupDateTime();
@@ -45,7 +45,8 @@ void loop (){
   yield();
   currentMillis = millis();
   runtimeMinutes = currentMillis / 60000;
-  if(abs(currentMillis - previousMillis) > 2000){  // sampling sensors every 2 sec
+  long millDiff = currentMillis - previousMillis;
+  if(abs(millDiff) > 2000){  // sampling sensors every 2 sec
     previousMillis = currentMillis;             // save the last time  
 
 #ifdef ENABLE_WIFI
